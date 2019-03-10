@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.dao.PriceTypeMapper">
+    <resultMap id="BaseResultMap" type="com.qfedu.pojo.PriceType">
+        <id column="pr_id" jdbcType="INTEGER" property="prId"/>
+        <result column="pr_typename" jdbcType="VARCHAR" property="prTypename"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        pr_id, pr_typename
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pricetype
+        where pr_id = #{prId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from pricetype
+        where pr_id = #{prId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.qfedu.pojo.PriceType">
+        insert into pricetype (pr_id, pr_typename)
+        values (#{prId,jdbcType=INTEGER}, #{prTypename,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.qfedu.pojo.PriceType">
+        insert into pricetype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="prId != null">
+                pr_id,
+            </if>
+            <if test="prTypename != null">
+                pr_typename,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="prId != null">
+                #{prId,jdbcType=INTEGER},
+            </if>
+            <if test="prTypename != null">
+                #{prTypename,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.PriceType">
+        update pricetype
+        <set>
+            <if test="prTypename != null">
+                pr_typename = #{prTypename,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where pr_id = #{prId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.PriceType">
+        update pricetype
+        set pr_typename = #{prTypename,jdbcType=VARCHAR}
+        where pr_id = #{prId,jdbcType=INTEGER}
+    </update>
+</mapper>

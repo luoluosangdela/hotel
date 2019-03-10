@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/datepicker.css"/>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="layui/layui.all.js"></script>
+    <script type="text/javascript" src="js/datepicker.all.js"></script>
+    <script type="text/javascript" src="./js/plugins/moment.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=A1LU7iHS0avqQwPLAxbhKn0UYSQCuRVH"></script>
+    <script src="js/jquery.baiduMap.min.js"></script>
+    <style>
+        .tit-cont {
+            margin-left: 30px;
+            font-family: "微软雅黑";
+            font-size: larger;
+            color: #FFFFFF;
+        }
+
+        .txt-cont {
+            margin-top: 10px;
+            margin-left: 30px;
+            font-family: arial;
+            font-size: small;
+            color: #FFFFFF;
+        }
+
+        .u-phone {
+            margin-top: auto;
+            margin-left: auto;
+            font-family: arial;
+            font-size: large;
+        }
+
+        p {
+            text-align: center;
+            font-size: x-large;
+        }
+
+        h3 {
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" style="background-color: #D3D4D3;">
+        <div class="layui-logo"><p style="font-size: x-large;">民宿网</p></div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="index.html">首页</a></li>
+            <li class="layui-nav-item"><a href="">目的地</a></li>
+            <li class="layui-nav-item"><a href="">精选城市</a></li>
+            <li class="layui-nav-item"><a href="">旅行故事</a></li>
+            <li class="layui-nav-item"><a href="">度假攻略</a></li>
+        </ul>
+    </div>
+
+
+</div>
+</div>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+</script>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="img/r1.jpg" width="33%" alt="one" style="float: left">
+            <img src="img/r3.jpg" width="33%" alt="one" style="float: left">
+            <img src="img/r2.jpg" width="33%" alt="one" style="float: left">
+            <div class="carousel-caption">
+                ...
+            </div>
+        </div>
+        <div class="item">
+            <img src="img/r1.jpg" width="33%" alt="two" style="float: left">
+            <img src="img/r4.jpg" width="33%" alt="two" style="float: left">
+            <img src="img/r2.jpg" width="33%" alt="two" style="float: left">
+            <div class="carousel-caption">
+                ...
+            </div>
+        </div>
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-12  col-md-offset-4">
+        <div style="text-align: center; margin-top: 0px;">
+            <form class="navbar-form navbar-left">
+                <div class="c-datepicker-date-editor  J-datepicker-range-day">
+                    <i class="c-datepicker-range__icon kxiconfont icon-clock"></i> <input
+                        placeholder="入住日期" name="liveTime" id="i1"
+                        class="c-datepicker-data-input only-date" value=""> <span
+                        class="c-datepicker-range-separator">到</span> <input
+                        placeholder="退房日期" name="leaveTime" id="i2"
+                        class="c-datepicker-data-input only-date" value="">
+                </div>
+            </form>
+            <button class="btn btn-default"
+                    style="background-color: #B5A191; height: 34px; margin-bottom: 6px;float: left;margin-top: 5px"
+                    onclick="book()">立即预定
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+<!--房间详情-->
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">综述</li>
+        <li>房间设施</li>
+        <li>入住须知</li>
+        <li>点评</li>
+        <li>位置</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 200px;">
+        <div class="layui-tab-item layui-show">
+            <p style="font-size: x-large">吴欢艺墅</p>
+            <p style="font-size: large">
+                整栋别墅使用面积高达471.38多平米，室内建筑风格是新中式风格，总共分为四层，地上三层、地下一层；整个设计动静分区，集居住、餐饮、娱乐为一体；整栋别墅由6房（5房+1中式榻榻米）8卫3厅（客厅+茶厅+餐厅），麻将区、唱歌、私人影院区组成；一层涵盖客厅、餐厅、中西厨房、老人房及车库，二层为主卧+2个客卧房间；三层为一个榻榻米房间，咱家每个房间都有独立的卫生间，极大的保证我们家庭、朋友聚会的私密性；负一层主要为麻将区、私人KTV影音区、茶艺区，一家人可以在茶余饭后进行相关娱乐活动；个性艺术品茶室、更有棋牌、纸牌等丰富桌游可供您娱乐~~80多平米私家庭院可进行烧烤活动，庭院内有一张大长桌和椅子可同时容纳18-22人同时用餐
+            </p>
+        </div>
+        <div class="layui-tab-item" style="font-size: large">
+            卫浴设施：<br/>
+            独立卫浴拖鞋浴缸洗漱用品<br/>
+            厨具家电：<br/>
+            电视全天热水微波炉烧烤器具无线wifi空调电冰箱
+        </div>
+        <div class="layui-tab-item" style="font-size: large">
+            入住须知<br/>
+            入住时间： 14:00<br/>
+            退房时间： 12:00<br/>
+            接待时间： 9:00至18:00
+            被单更换： 每客一换<br/>
+            独立卫生间： 5间<br/>
+            公共卫生间： 2间<br/>
+            住宿押金： ￥2000.00<br/>
+            所有床型：
+            大床(2.0x1.8米)5张
+            榻榻米(2.0x1.5米)1张<br/>
+            不允许抽烟不允许携带宠物不允许聚会不允许加人
+        </div>
+        <div class="layui-tab-item" style="font-size: large">
+            交通位置:<i class="layui-icon">&#xe67b;&#xe67b;&#xe67b;</i><br/>
+            房东服务:<i class="layui-icon">&#xe67b;&#xe67b;&#xe67b;&#xe67b;</i><br/>
+            卫生环境:<i class="layui-icon">&#xe67b;&#xe67b;&#xe67b;&#xe67b;</i><br/>
+            室内装修:<i class="layui-icon">&#xe67b;&#xe67b;&#xe67b;&#xe67b;&#xe67b;&#xe67b;</i>
+        </div>
+        <div class="layui-tab-item" style="font-size: large">
+            北京昌平区御汤山东一区1-109<br/>
+            专享别墅5间卧室6张床7卫生间宜住12人
+        </div>
+    </div>
+</div>
+
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+
+</script>
+<script>
+    var id = window.location.search;
+    console.log(id);
+    function book() {
+        $.ajax({
+            type: "post",
+            url: "bookRoom.do" + id,
+            data: {liveTime: $("#i1").val(), leaveTime: $("#i2").val()},
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var data = data.data;
+                    window.location.href = "book.html?totalprice=" + data.totalprice;
+                }
+            }
+        })
+    }
+</script>
+<div class="layui-row" style="margin-top: auto;margin-bottom: 50px" align="center">
+    <!-- <div class="col-lg-6 col-sm-6 col-md-6  col-lg-offset-3   col-sm-offset-3  col-md-offset-3 "> -->
+    <div class="col-lg-12 col-sm-12 col-md-12  ">
+        <p style="font-size: x-large;text-align: center">位置</p>
+        <div style="width: auto;margin: auto;height: 400px">
+            <div id="baiduMap" style="width: auto;height: 100%;"></div>
+        </div>
+    </div>
+</div>
+<script type="application/javascript">
+    //地图展示
+    var points = [{
+        id: 3,
+        lng: 113.6582900820,
+        lat: 34.7275567508,
+        title: "",
+        content: ["地址：郑州市", "电话：120-123456987"]
+    }];
+    var map = new BaiduMap({
+        id: "baiduMap",
+        level: 17, //  选填--地图级别--(默认15)
+        zoom: true, // 选填--是否启用鼠标滚轮缩放功能--(默认false)
+        type: ["地图", "卫星", "三维"], // 选填--显示地图类型--(默认不显示)
+        width: 320, // 选填--信息窗口width--(默认自动调整)
+        height: 70, // 选填--信息窗口height--(默认自动调整)
+        titleClass: "title",
+        contentClass: "content",
+        showPanorama: true, // 是否显示全景控件(默认false)
+        showMarkPanorama: true, // 是否显示标注点全景图(默认false)
+        showLabel: false, // 是否显示文本标注(默认false)
+        mapStyle: "normal", // 默认normal,可选dark,light
+        icon: { // 选填--自定义icon图标
+            url: "img/position.png",
+            width: 30,
+            height: 30
+        },
+        centerPoint: { // 中心点经纬度
+            lng: 113.6582900820,
+            lat: 34.7275567508
+        },
+        index: 3, // 开启对应的信息窗口，默认-1不开启
+        animate: true, // 是否开启坠落动画，默认false
+        points: points, // 标注点--id(唯一标识)
+        callback: function (id) {
+            $(".list").find("li").eq(id - 1).addClass("active").siblings().removeClass("active");
+        }
+    });
+</script>
+
+
+<!--底部-->
+<div class="layui-footer" style="background-color: #D3D4D3;  color: darkgray; text-align: center;">
+    <div class="layui-row">
+        <div class="layui-col-md4">
+            <div class="grid-demo grid-demo-bg1">
+                <ul style="list-style-type: none">
+                    <li class="u-phone">国内客服</li>
+                    <li class="u-text">400-188-1234</li>
+                    <li class="u-phone">海外客服</li>
+                    <li class="u-text">400-188-1234转2</li>
+                    <li class="u-phone">86-10-80697258转2（境外拨打）</li>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="grid-demo">
+                <div class="layui-col-md6">
+                    <div class="grid-demo">
+                        <ul style="list-style-type: none">
+                            <li class="u-text" style="text-align: center;">下载APP</li>
+                            <li><img
+                                    src="data:image/png;base64,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"
+                                    style="display: block;margin-left: 80px;">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="grid-demo">
+                        <ul style="list-style-type: none">
+                            <li class="u-text" style="text-align: center;">关注微信小程序</li>
+                            <li><img
+                                    src="data:image/png;base64,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"
+                                    style="display: block;margin-left: 75px;">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="grid-demo grid-demo-bg1">
+                <ul class="u-text1" style="list-style-type: none">
+                    <li>我是房客</li>
+                    <li>关于途家</li>
+                    <li>加入途家</li>
+                    <li>预定服务</li>
+                    <li>优惠活动</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+    $(function () {
+//年月日范围
+        $(".J-datepicker-range-day").datePicker({
+            hasShortcut: false,
+            format: 'YYYY-MM-DD',
+            isRange: true,
+            clearBtn: true,//清除按钮
+            todayBtn: true,//今日按钮
+        });
+
+    });
+</script>
+</body>
+</html>

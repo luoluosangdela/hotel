@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.dao.RoomMapper">
+    <resultMap id="BaseResultMap" type="com.qfedu.pojo.Room">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="distance" jdbcType="DOUBLE" property="distance"/>
+        <result column="kw_info" jdbcType="VARCHAR" property="kwInfo"/>
+        <result column="marks" jdbcType="INTEGER" property="marks"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+        <result column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="ptid" jdbcType="INTEGER" property="ptid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, img_url, title, pid, distance, kw_info, marks, price, tid, ptid
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from room
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from room
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.qfedu.pojo.Room">
+        insert into room (id, img_url, title,
+        pid, distance, kw_info,
+        marks, price, tid,
+        ptid)
+        values (#{id,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+        #{pid,jdbcType=INTEGER}, #{distance,jdbcType=DOUBLE}, #{kwInfo,jdbcType=VARCHAR},
+        #{marks,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER},
+        #{ptid,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.qfedu.pojo.Room">
+        insert into room
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="distance != null">
+                distance,
+            </if>
+            <if test="kwInfo != null">
+                kw_info,
+            </if>
+            <if test="marks != null">
+                marks,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="tid != null">
+                tid,
+            </if>
+            <if test="ptid != null">
+                ptid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="distance != null">
+                #{distance,jdbcType=DOUBLE},
+            </if>
+            <if test="kwInfo != null">
+                #{kwInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="marks != null">
+                #{marks,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=INTEGER},
+            </if>
+            <if test="tid != null">
+                #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="ptid != null">
+                #{ptid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.Room">
+        update room
+        <set>
+            <if test="imgUrl != null">
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="distance != null">
+                distance = #{distance,jdbcType=DOUBLE},
+            </if>
+            <if test="kwInfo != null">
+                kw_info = #{kwInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="marks != null">
+                marks = #{marks,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=INTEGER},
+            </if>
+            <if test="tid != null">
+                tid = #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="ptid != null">
+                ptid = #{ptid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.Room">
+        update room
+        set img_url = #{imgUrl,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
+        pid = #{pid,jdbcType=INTEGER},
+        distance = #{distance,jdbcType=DOUBLE},
+        kw_info = #{kwInfo,jdbcType=VARCHAR},
+        marks = #{marks,jdbcType=INTEGER},
+        price = #{price,jdbcType=INTEGER},
+        tid = #{tid,jdbcType=INTEGER},
+        ptid = #{ptid,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <resultMap id="BaseResultMap2" type="com.qfedu.vo.RoomVo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="distance" jdbcType="DOUBLE" property="distance"/>
+        <result column="kw_info" jdbcType="VARCHAR" property="kwInfo"/>
+        <result column="marks" jdbcType="INTEGER" property="marks"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+        <result column="typename" property="typename"/>
+        <result column="name" property="name"/>
+    </resultMap>
+    <select id="findAllRoom" parameterType="HashMap" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid limit #{index},#{limit}
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(*) count from(
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid) a
+    </select>
+
+    <select id="findAllRoom1" parameterType="HashMap" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid
+    </select>
+
+    <select id="findByCondition" parameterType="com.qfedu.pojo.Room" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid
+        inner join pricetype pt on pt.pr_id=r.ptid
+        <where>
+            <if test="tid != null  and tid!=''">
+                and r.tid=#{tid}
+            </if>
+            <if test="ptid!= null and ptid!=''">
+                and r.ptid=#{ptid}
+            </if>
+        </where>
+    </select>
+    <select id="findByPriceAsc" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price Price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid order by Price asc
+    </select>
+    <select id="findByPriceDesc" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid order by Price desc
+    </select>
+    <select id="findByMarkAsc" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks Marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid order by Marks asc
+    </select>
+    <select id="findByMarkDesc" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks Marks ,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid order by Marks desc
+    </select>
+
+
+
+
+      <resultMap id="BaseResultMap3" type="com.qfedu.vo.BookVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="totalprice"  property="totalprice" />
+        <result column="liveTime"  property="liveTime" />
+        <result column="leaveTime"  property="leaveTime" />
+      </resultMap>
+    <select id="findRoomById"  parameterType="int" resultType="com.qfedu.pojo.Room">
+     select * from room where id=#{id}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <select id="findAllRoom3" parameterType="HashMap" resultMap="BaseResultMap2">
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid
+          where      price  =  #{price}
+          limit #{index},#{limit}
+    </select>
+    <select id="selectCount3" resultType="int">
+        select count(*) count from(
+        select pc.name , r.id,r.img_url,r.title,r.distance ,r.kw_info,r.marks,r.price,rt.typename
+        from room r INNER JOIN pc on pc.id=r.pid
+        inner join roomtype rt on rt.id=r.tid) a
+        where  price  =  #{price}
+    </select>
+</mapper>
